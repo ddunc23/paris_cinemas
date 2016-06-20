@@ -1,0 +1,29 @@
+# Secret Django Things #
+########################
+secret_settings.py
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Media, Databases, Logs, and Compiled Python Files #
+##############################################
+*.sqlite3
+/media/
+/media/*
+/whoosh_index/
+/whoosh_index/*
+*.pyc
+*.sql
+*.pgsql
+*.log
+/logs/
+/logs/*
+/backups/
+/backups/*
