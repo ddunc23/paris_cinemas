@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Paris Cinemas</title>
+		<meta charset="UTF-8"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- Stop search engines indexing the page for the timebeing. TURN OFF BEFORE LAUNCH! -->
+		<meta name="robots" content="noindex" />
+		<!-- Mapbox -->
+		<script>
+			L_PREFER_CANVAS = true;
+		</script>
+		<!-- Leaflet / Mapbox -->
+		<script src='https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.js'></script>
+		<link href='https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.css' rel='stylesheet' />
+		<script src="https://code.jquery.com/jquery-3.0.0.min.js" integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0=" crossorigin="anonymous"></script>
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+		<style type="text/css">
+			html, body {
+				height: 100%;
+			}
+			body {
+				padding-top: 50px;
+			}
+			div#map {
+				display: block;
+			}
+			div.map_large {
+				width: 100%;
+				height: 100%;
+			}
+			div.map_small {
+				width: 100%;
+				height: 350px;
+			}
+		</style>
+	</head>
+	<body data-spy="scroll" data-target="#fixed-nav">
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container-fluid">
+			    <div class="navbar-header navbar-left">
+      				<a class="navbar-brand" href="/">Paris Cinemas</a>
+      				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+				        <span class="sr-only">Toggle navigation</span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				    </button>
+    			</div>
+    			<div class="collapse navbar-collapse" id="navbar-collapse">
+    				<ul class="nav navbar-nav navbar-right">
+    					<li><a href="{% url 'map' %}">Map</a></li>
+    					<li><a href="{% url 'all_cinemas' %}">Cinemas</a></li>
+    					<li><a href="{% url 'all_letters' %}">Letters</a></li>
+    				</ul>
+    			</div>
+    		</div>
+    	</nav>
+
+
+	{% block content %}
+
+	{% endblock %}
+
+	</body>
+</html>

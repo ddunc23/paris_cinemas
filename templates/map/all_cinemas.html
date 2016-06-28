@@ -1,0 +1,22 @@
+{% extends 'map/base.html' %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12 col-md-8 col-md-offset-2">
+		<h1>Cinemas</h1>
+		<table class="table">
+			<thead>
+				<td><h4>Name</h4></td><td><h4>Original Address</h4></td><td><h4>Date Opened</h4></td>
+			</thead>
+			{% for cinema in cinemas %}
+				<tr>
+					<td><a href="{% url 'cinema_page' cinema.id %}">{{ cinema }}</a></td><td>{{ cinema.o_address }}</td><td>{{ cinema.open_date }}</td>
+				</tr>
+			{% endfor %}
+		</table>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

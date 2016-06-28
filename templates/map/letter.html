@@ -1,0 +1,87 @@
+{% extends 'map/base.html' %}
+
+{% block content %}
+
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12 col-md-8 col-md-offset-2">
+			<h1>{{ letter }}</h1>
+			<div id="map" class="map_small"></div>
+			<table class="table">
+				<tr>
+					<td>Year</td><td>{{ letter.year }}</td>
+				</tr>
+				<tr>
+					<td>Month</td><td>{{ letter.month }}</td>
+				</tr>
+				<tr>
+					<td>Date</td><td>{{ letter.date }}</td>
+				</tr>
+				<tr>
+					<td>Orignal Address</td><td>{{ letter.o_address }}</td>
+				</tr>
+				<tr>
+					<td>Current Address</td><td>{{ letter.c_address }}</td>
+				</tr>
+				<tr>
+					<td>City</td><td>{{ letter.city }}</td>
+				</tr>
+				<tr>
+					<td>Postcode</td><td>{{ letter.postcode }}</td>
+				</tr>
+				<tr>
+					<td>Occupation</td><td>{{ letter.occupation }}</td>
+				</tr>
+				<tr>
+					<td>Sex</td><td>{{ letter.sex }}</td>
+				</tr>
+				<tr>
+					<td>Letter Purpose</td><td>{{ letter.letter_pur }}</td>
+				</tr>
+				<tr>
+					<td>Number of Contributors</td><td>{{ letter.contrib_no }}</td>
+				</tr>
+				<tr>
+					<td>Other Personalities</td><td>{{ letter.persons }}</td>
+				</tr>
+				<tr>
+					<td>Fan Practices</td><td>{{ letter.practices }}</td>
+				</tr>
+				<tr>
+					<td>Magazines</td><td>{{ letter.magazines }}</td>
+				</tr>
+				<tr>
+					<td>Local Cinema</td><td>{{ letter.cinema }}</td>
+				</tr>
+
+
+			</table>
+		</div>
+	</div>
+</div>
+
+<script>
+
+	var map = L.map('map').setView([{{ letter.geom.1 }},{{ letter.geom.0 }}], 18);
+
+	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZGR1bmMyMyIsImEiOiJxQVhaaVhjIn0.T7vhn1bLeeQoHCsWZ_mp2g', {
+		maxZoom: 18,
+		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+			'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+			'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+		id: 'mapbox.light'
+	}).addTo(map);
+
+	var letterIcon = L.icon({
+		iconUrl: '/static/img/post-15_transparent-red.png',
+	    iconSize:     [25, 25],
+	    iconAnchor:   [15, 15],
+	    popupAnchor:  [-3, -10], 
+	})
+
+	var marker = L.marker([{{ letter.geom.1 }},{{ letter.geom.0 }}], {
+		icon: letterIcon,
+	}).addTo(map);
+
+</script>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'map/base.html' %}
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12 col-md-8 col-md-offset-2">
+		<h1>Letters</h1>
+		<table class="table">
+			<thead>
+				<td><h4>Name</h4></td><td><h4>Original Address</h4></td><td><h4>Year</h4></td>
+			</thead>
+			{% for letter in letters %}
+				<tr>
+					<td><a href="{% url 'letter_page' letter.id %}">{{ letter }}</a></td><td>{{ letter.o_address }}</td><td>{{ letter.year }}</td>
+				</tr>
+			{% endfor %}
+		</table>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
