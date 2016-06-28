@@ -11,6 +11,8 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "paris_cinemas.settings")
+#os.environ.setdefault("DJANGO_SETTINGS_MODULE", "paris_cinemas.settings")
+
+os.environ['DJANGO_SETTINGS_MODULE'] = 'paris_cinemas.settings.local'
 
 application = get_wsgi_application()
