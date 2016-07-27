@@ -1,0 +1,80 @@
+{% extends 'map/base.html' %}
+
+{% block content %}
+
+<div id="map" class="map_small"></div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12 col-md-8 col-md-offset-2">
+			<h1>{{ theme }}</h1>
+			<ul class="list-unstyled">
+				{% for cinema in cinemas %}
+				<li>{{ cinema }}</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-md-8 col-md-offset-2">
+		{{ theme.body|safe }}
+		</div>
+	</div>
+</div>
+
+<script>
+
+	var cinemasUrl = '{% url "cinemas_by_theme" theme.id %}';
+
+	var map = L.map('map').setView([48.8566, 2.3522], 13);
+
+	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZGR1bmMyMyIsImEiOiJxQVhaaVhjIn0.T7vhn1bLeeQoHCsWZ_mp2g', {
+		maxZoom: 18,
+		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+			'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+			'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+		id: 'mapbox.light'
+	}).addTo(map);
+
+	function onEachCinema(feature, layer) {
+		if (feature.properties) {
+			layer.bindPopup('<a href="cinema/' + feature.id + '/">' + feature.properties.name +'</a>');
+		}
+	}
+
+	function onEachLetter(feature, layer) {
+		if (feature.properties) {
+			layer.bindPopup('<a href="letter/' + feature.id + '/">' + feature.properties.name +'</a>');
+		}
+	}
+
+	var cinemaIcon = L.icon({
+	    iconUrl: '/static/img/cinema-15_transparent-green.png',
+	    iconSize:     [25, 25],
+	    iconAnchor:   [15, 15],
+	    popupAnchor:  [-3, -10], 
+	});
+
+	var letterIcon = L.icon({
+		iconUrl: '/static/img/post-15_transparent-red.png',
+	    iconSize:     [25, 25],
+	    iconAnchor:   [15, 15],
+	    popupAnchor:  [-3, -10], 
+	})
+
+	$.getJSON(cinemasUrl).done(function(data) {
+		var cinemas = L.geoJson(data, {
+			pointToLayer: function(feature, latlng) {
+				return L.marker(latlng, {
+					icon: cinemaIcon,
+				});
+			},
+			onEachFeature: onEachCinema,
+		}).addTo(map);
+		map.fitBounds(cinemas.getBounds());
+	});
+
+</script>
+
+
+{% endblock %}

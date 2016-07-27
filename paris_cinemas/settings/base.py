@@ -34,6 +34,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.gis',
+    'ckeditor',
+    'ckeditor_uploader',
     'rest_framework',
     'rest_framework_gis',
     'djgeojson',
@@ -65,6 +67,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'map.context_processors.theme_links',
             ],
         },
     },
@@ -96,7 +99,15 @@ STATICFILES_DIRS = [
     'static/',
 ]
 
+MEDIA_ROOT = BASE_DIR.child('media')
+MEDIA_URL = '/media/'
+
+# Django-ckeditor Settings
+
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+
 # Django-Leaflet
+
 
 # Django-REST-framework
 

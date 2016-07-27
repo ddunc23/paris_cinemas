@@ -13,7 +13,7 @@
 		<!-- Leaflet / Mapbox -->
 		<script src='https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.js'></script>
 		<link href='https://api.mapbox.com/mapbox.js/v2.2.4/mapbox.css' rel='stylesheet' />
-		<script src="https://code.jquery.com/jquery-3.0.0.min.js" integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0=" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/jquery-2.1.0.min.js" crossorigin="anonymous"></script>
 		<!-- Bootstrap -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
@@ -54,6 +54,14 @@
     					<li><a href="{% url 'map' %}">Map</a></li>
     					<li><a href="{% url 'all_cinemas' %}">Cinemas</a></li>
     					<li><a href="{% url 'all_letters' %}">Letters</a></li>
+    					<li class="dropdown">
+							<a id="categoryLinksLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">Themes <span class="caret"></span></a>
+							<ul class="dropdown-menu" aria-labelledby="categoryLinksLabel">
+			    				{% for theme in themes %}
+			    					<li><a href="{% url 'theme' theme.id %}">{{ theme }}</a></li>
+			    				{% endfor %}
+			    			</ul>
+			    		</li>
     				</ul>
     			</div>
     		</div>

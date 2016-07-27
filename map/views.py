@@ -1,10 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect, Http404
-from map.models import Cinema, Letter
+from map.models import Cinema, Letter, Theme
 from map.serializers import CinemaSerializer, LetterSerializer
 from rest_framework.renderers import JSONRenderer
-
-# Create your views here.
 
 
 def map(request):
@@ -34,6 +32,13 @@ def all_letters(request):
 
 	return render(request, 'map/all_letters.html', {'letters': letters})
 
+
+def theme(request, theme):
+	theme = get_object_or_404(Theme, id=theme)
+	cinemas = Cinema.objects.filter(themes=theme)
+
+	return render(request, 'map/theme.html', {'theme': theme, 'cinemas': cinemas})
+
 # API views
 
 class JSONResponse(HttpResponse):
@@ -54,8 +59,16 @@ def cinema(request, cinema):
 	"""A single cinema"""
 	if request.method == 'GET':
 		cinema = Cinema.objects.get(id=cinema)
-		serializer = CinemaSerializer(cinemas, many=False)
+		serializer = CinemaSerializer(cinema, many=False)
 		return JSONResponse(serializer.data)
+
+def cinemas_by_theme(request, theme):
+	"""All cinemas in a single theme"""
+	if request.method == 'GET':
+		cinemas = Cinema.objects.filter(themes=theme)
+		serializer = CinemaSerializer(cinemas, many=True)
+		return JSONResponse(serializer.data)
+
 
 def letters(request):
 	"""All letters as geoJson"""
