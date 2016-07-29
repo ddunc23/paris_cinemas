@@ -12,6 +12,7 @@ class CinemaAdmin(LeafletGeoAdmin):
 	filter_horizontal = ['themes']
 	list_display = ('name', 'o_address', 'postcode', 'arrondisement', 'get_themes')
 	list_editable = ('arrondisement',)
+	search_fields = ('name',)
 
 	def set_theme_action(self, request, queryset):
 		if 'do_action' in request.POST:
