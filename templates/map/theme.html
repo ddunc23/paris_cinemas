@@ -38,7 +38,7 @@
 
 	function onEachCinema(feature, layer) {
 		if (feature.properties) {
-			layer.bindPopup('<a href="cinema/' + feature.id + '/">' + feature.properties.name +'</a>');
+			layer.bindPopup('<a href="/map/cinema/' + feature.id + '/">' + feature.properties.name +'</a>');
 		}
 	}
 

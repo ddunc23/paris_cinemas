@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^map/', include('map.urls')),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    url(r'^grappelli/', include('grappelli.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

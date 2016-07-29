@@ -41,6 +41,9 @@
 				<tr>
 					<td>Crimes</td><td>{{ cinema.crimes }}</td>
 				</tr>
+				<tr>
+					<td>Themes</td><td>{% for theme in cinema.themes.all %}{{ theme }}, {% endfor %}</td>
+				</tr>
 			</table>
 		</div>
 	</div>
