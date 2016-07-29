@@ -20,7 +20,15 @@
 
 	function onEachCinema(feature, layer) {
 		if (feature.properties) {
-			layer.bindPopup('<a href="cinema/' + feature.id + '/">' + feature.properties.name +'</a>');
+			var short_description = '';
+			var thumbnail = '';
+			if (feature.properties.thumbnail) {
+				thumbnail = '<img src="' +feature.properties.thumbnail + '" width="128px" alt="thumbnail" /><br />';
+			}
+			if (feature.properties.short_description) {
+				short_description = feature.properties.short_description;
+			}
+			layer.bindPopup(thumbnail + '<a href="cinema/' + feature.id + '/">' + feature.properties.name +'</a><br />' + short_description);
 		}
 	}
 

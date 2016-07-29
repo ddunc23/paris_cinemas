@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.gis.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.core.urlresolvers import reverse
 
 
 def feature_directory_path(instance, filename):
@@ -16,7 +17,7 @@ def feature_directory_path(instance, filename):
 class Theme(models.Model):
 	title = models.CharField(max_length=140)
 	slug = models.SlugField()
-	body = RichTextUploadingField(blank=False)
+	body = RichTextUploadingField(blank=True, null=True)
 	TYPE_CHOICES = (
 		('FILM', 'Film'),
 	)
@@ -35,15 +36,16 @@ class Cinema(models.Model):
 	o_address = models.CharField(max_length=256, verbose_name='Original Address', blank=True, null=True)
 	c_address = models.CharField(max_length=256, verbose_name='Current Address', blank=True, null=True)
 	city = models.CharField(max_length=256, blank=True, null=True)
+	arrondisement = models.CharField(max_length=128, blank=True, null=True)
 	postcode = models.CharField(max_length=32, blank=True, null=True)
 	x = models.FloatField(null=True, blank=True)
 	y = models.FloatField(null=True, blank=True)
 	# Take the films out - they're going to be themes
-	barrabas = models.CharField(max_length=256, verbose_name='Barrabas March 1920', blank=True, null=True)
-	les_deux = models.CharField(max_length=256, verbose_name='Les Deux Gamines 1921', blank=True, null=True)
-	meetings = models.CharField(max_length=256, verbose_name='Political meetings 1918-1924', blank=True, null=True)
 	crimes = models.CharField(max_length=256, blank=True, null=True)
 	themes = models.ManyToManyField(Theme, blank=True)
+	body = RichTextUploadingField(blank=True, null=True)
+	thumbnail = models.ImageField(upload_to=feature_directory_path, null=True, blank=True, verbose_name='Thumbnail Image')
+	short_description = models.CharField(max_length=140, blank=True, null=True)
 
 	def get_themes(self):
 		themes = ''
@@ -53,7 +55,9 @@ class Cinema(models.Model):
 		return themes
 
 	get_themes.short_description = 'Themes'
-			
+	
+	def get_absolute_url(self):
+		return reverse('map.views.cinema_page', args=[str(self.id)])
 
 	def __unicode__(self):
 		return self.name

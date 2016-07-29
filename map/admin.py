@@ -1,15 +1,17 @@
 from django.contrib import admin
 from map.models import Cinema, Theme
-from map.forms import ThemeActionForm
+from map.forms import ThemeActionForm, CinemaForm
 from leaflet.admin import LeafletGeoAdmin
 from django.contrib import messages
 from django.shortcuts import render
 
 class CinemaAdmin(LeafletGeoAdmin):
 	model = Cinema
+	form = CinemaForm
 	actions = ['set_theme_action']
 	filter_horizontal = ['themes']
-	list_display = ('name', 'o_address', 'postcode', 'get_themes')
+	list_display = ('name', 'o_address', 'postcode', 'arrondisement', 'get_themes')
+	list_editable = ('arrondisement',)
 
 	def set_theme_action(self, request, queryset):
 		if 'do_action' in request.POST:

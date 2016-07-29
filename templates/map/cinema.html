@@ -2,15 +2,13 @@
 
 {% block content %}
 
+<div id="map" class="map_small"></div>
 <div class="container">
 	<div class="row">
 		<div class="col-xs-12 col-md-8 col-md-offset-2">
-			<h1>{{ cinema }}</h1>
-			<div id="map" class="map_small"></div>
+			<h1>{{ cinema }}{% if user.is_authenticated and user.is_staff %} <a href="{% url 'admin:map_cinema_change' cinema.id %}" class="btn btn-default btn-sm">Edit</a>{% endif %}</h1>
+			{% if cinema.body %}{{ cinema.body|safe }}{% endif %}
 			<table class="table">
-				<tr>
-					<td>Alternative Name</td><td>{{ cinema.other_name }}</td>
-				</tr>
 				<tr>
 					<td>Opening Date</td><td>{{ cinema.open_date }}</td>
 				</tr>
@@ -22,24 +20,6 @@
 				</tr>
 				<tr>
 					<td>Current Address</td><td>{{ cinema.c_address }}</td>
-				</tr>
-				<tr>
-					<td>City</td><td>{{ cinema.city }}</td>
-				</tr>
-				<tr>
-					<td>Postcode</td><td>{{ cinema.postcode }}</td>
-				</tr>
-				<tr>
-					<td>Barrabas</td><td>{{ cinema.barrabas }}</td>
-				</tr>
-				<tr>
-					<td>Les Deux</td><td>{{ cinema.les_deux }}</td>
-				</tr>
-				<tr>
-					<td>Political Meetings</td><td>{{ cinema.meetings }}</td>
-				</tr>
-				<tr>
-					<td>Crimes</td><td>{{ cinema.crimes }}</td>
 				</tr>
 				<tr>
 					<td>Themes</td><td>{% for theme in cinema.themes.all %}{{ theme }}, {% endfor %}</td>

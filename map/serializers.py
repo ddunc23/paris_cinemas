@@ -7,7 +7,7 @@ class CinemaSerializer(GeoFeatureModelSerializer):
     class Meta:
         model = Cinema
         geo_field = 'geom'
-        fields = ('id', 'name', 'themes')
+        fields = ('id', 'name', 'themes', 'short_description', 'thumbnail')
 
 class LetterSerializer(GeoFeatureModelSerializer):
 	class Meta:

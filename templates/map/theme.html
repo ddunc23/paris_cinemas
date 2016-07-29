@@ -7,17 +7,20 @@
 <div class="container">
 	<div class="row">
 		<div class="col-xs-12 col-md-8 col-md-offset-2">
-			<h1>{{ theme }}</h1>
-			<ul class="list-unstyled">
-				{% for cinema in cinemas %}
-				<li>{{ cinema }}</li>
-				{% endfor %}
-			</ul>
+			<h1>{{ theme }}{% if user.is_authenticated and user.is_staff %} <a href="{% url 'admin:map_theme_change' theme.id %}" class="btn btn-default btn-sm">Edit</a>{% endif %}</h1>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-xs-12 col-md-8 col-md-offset-2">
-		{{ theme.body|safe }}
+			{{ theme.body|safe }}
+			
+		</div>
+		<div class="col-xs-12 col-md-2">
+			<ul class="list-unstyled">
+				{% for cinema in cinemas %}
+				<li><a href="{% url 'cinema_page' cinema.id %}">{{ cinema }}</a></li>
+				{% endfor %}
+			</ul>
 		</div>
 	</div>
 </div>

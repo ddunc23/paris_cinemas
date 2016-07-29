@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'rest_framework_gis',
     'djgeojson',
     'leaflet',
+    'easy_thumbnails',
     'map',
 )
 
