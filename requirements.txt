@@ -1,10 +1,15 @@
 Django==1.8
+Pillow==3.3.0
 Unipath==1.1
 argparse==1.2.1
+django-ckeditor==5.0.3
+django-filebrowser==3.6.4
 django-geojson==2.8.1
+django-grappelli==2.7.3
 django-leaflet==0.18.0
 djangorestframework==3.3.2
 djangorestframework-gis==0.10.1
+easy-thumbnails==2.3
 psycopg2==2.6.1
 six==1.10.0
 wsgiref==0.1.2
